@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Nav, Navbar, Container, Table } from 'react-bootstrap';
 import Select from 'react-select'
-import logo from './github-mark.png';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -75,6 +74,7 @@ class App extends React.Component {
 
   render() {
 
+    {/* Opções de linguagens para buscar no GitHub */} 
     const options = [
       { value: 'go', label: 'Go' },
       { value: 'swift', label: 'Swift' },
@@ -89,7 +89,7 @@ class App extends React.Component {
       { value: 'haskell', label: 'Haskel' }
     ]
     
-    const divStyle = {
+    const separatorStyle = {
       height: '10px'
     }
 
@@ -112,26 +112,28 @@ const handleChange = (e) => {
             <Navbar.Brand href="#home">
               <img
                 alt=""
-                src="/0.png"
+                src={process.env.PUBLIC_URL + '/0.png'} 
                 width="30"
                 height="30"
                 className="d-inline-block align-top"
               />{' '}
               DevChallenge Ateliware
             </Navbar.Brand>
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              Desenvolvido por: <a href="#login">Emerson Costin</a>
-            </Navbar.Text>
-          </Navbar.Collapse>
+            <Navbar.Collapse className="justify-content-end">
+              <Navbar.Text>
+                Desenvolvido por: <a href="#login">Emerson Costin</a>
+              </Navbar.Text>
+            </Navbar.Collapse>
         </Navbar>
     
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={process.env.PUBLIC_URL + '/github-mark.png'} className="App-logo" alt="logo" />
         <p>
           Selecione as linguagens desejadas e clique em <code>Buscar</code>.
         </p>
+
         <Container>
 
+          {/* Componente  */}
           <Select
             placeholder="Linguagens"
             options={options}
@@ -140,18 +142,19 @@ const handleChange = (e) => {
             onChange={handleChange}
           />
 
-          <div style={divStyle}></div>
+          <div style={separatorStyle}></div>
 
           <Button variant="secondary" size="lg" block onClick={(e) => this.search(e)}>
             Buscar
           </Button>
 
-          <div style={divStyle}></div>
+          <div style={separatorStyle}></div>
 
         </Container>
 
         <Container>
         <Table striped bordered hover>
+          {/* Alterar o state visibility quando finalizar de carregar os dados da busca */}
           <thead className={this.state.visibility}>
               <tr>
                 <th>Linguagem</th>
@@ -162,10 +165,11 @@ const handleChange = (e) => {
           </thead> 
           <tbody>
           {
-          
+          /* Se o state isLoading for true e o isLoaded for false mostra a informação de 'carregando' */
           this.state.isLoading == true && this.state.isLoaded == false ?
             <tr><td colspan="4"><center><h2>Carregando...</h2></center></td></tr>
           : this.state.isLoaded == true &&
+          /* Se o state de isLoaded for true renderiza a tabela */
             this.state.items.map(item=><tr key={item.id}>
                 <td>{item.language}</td>
                 <td>{item.full_name}</td>
