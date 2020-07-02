@@ -30,6 +30,8 @@ app.post('/api/save_results', (req, res) => {
     let todos = [];
     let max_search_id;
 
+    //Search_ID é um identificador unico de cada pesquisa... Primeiro eu pego o com o maior valor 
+    //Para incrementar no proximo insert...
     let select_query = `SELECT MAX(search_id) as Search_id FROM ${table}`
 
     connection.query(select_query, (error, results, fields) => {
@@ -40,7 +42,7 @@ app.post('/api/save_results', (req, res) => {
         console.log(max_search_id)
         
         for(let i = 0; i < req.body.length; i++){
-
+            //Adiciono todos em um unico array
             todos.push([
                 req.body[i].id, 
                 max_search_id,
@@ -55,6 +57,8 @@ app.post('/api/save_results', (req, res) => {
             ])
         
         }
+
+        //Assim é possível enviar para o banco todos de uma única vez...
         let query = `insert into ${table} 
         (repository_id, search_id, node_id, name, full_name, private, html_url, url, stargazers_count, language)
         values ? `
@@ -67,21 +71,7 @@ app.post('/api/save_results', (req, res) => {
             connection.end();
         });
 
-    });
-
-    
-    
-    
+    });   
    
 
   });
-
-/* app.get('/api/results', (req, res) => {
-  pool.query(`select * from ${table}`, (err, rows) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(rows);
-    }
-  });
-}); */

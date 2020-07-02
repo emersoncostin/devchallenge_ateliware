@@ -68,7 +68,7 @@ class App extends React.Component {
               this.setState({
                 isLoaded: true
               })
-                // POST Request para salvar no banco de dados
+                // POST Request na API para salvar no banco de dados
                 const requestOptions = {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
@@ -77,7 +77,6 @@ class App extends React.Component {
               fetch('api/save_results', requestOptions)
                   .then(response => response.json())
                   .then(data => this.setState({ postId: data.id }));
-
             }
 
           }
@@ -93,8 +92,6 @@ class App extends React.Component {
   }
 
   render() {
-
-
     
     return (
       
