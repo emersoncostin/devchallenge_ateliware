@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const path = require('path')
 
 const app = express();
-const port = 5000;
+const PORT = process.env.PORT || 3000;
 const table ='search_results';
 
 app.use(bodyParser.json({limit: '50mb'})); 
@@ -85,7 +85,7 @@ app.post('/api/save_results', (req, res) => {
 
   const server = createServer(app)
 
-  server.listen(port, () => {
+  server.listen(PORT, () => {
     console.log(`App server now listening to port ${port}`);
   });
   
