@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const path = require('path')
 
 const app = express();
-const port = 8000;
+const port = 5000;
 const table ='search_results';
 
 app.use(bodyParser.json({limit: '50mb'})); 
