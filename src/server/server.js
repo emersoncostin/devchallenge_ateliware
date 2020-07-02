@@ -11,10 +11,10 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser({limit: '50mb'}));
 
 let config = {
-  host: process.env.MYSQL_HOST,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PWD,
-  database: process.env.MYSQL_DB,
+  host: 'us-cdbr-east-02.cleardb.com',
+  user: 'b96f2a4d4f5f9d',
+  password: 'e7172e58',
+  database: 'heroku_dc8fe8c35b14859',
 };
 
 
